@@ -5,7 +5,6 @@ import { NormalizedMarket } from '@screens/Markets/api/types'
 
 interface Props {
   markets: NormalizedMarket[]
-  tabIndex: number
 }
 
 const MarketTable = ({ markets }: Props) => {

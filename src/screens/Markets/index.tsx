@@ -11,9 +11,6 @@ const MaketsPage = () => {
   const [tabIndex, setTabIndex] = useState(0)
 
   const { markets } = useGetMarkets()
-  console.log({
-    markets,
-  })
 
   const handleTabChange = (_: SyntheticEvent, newIndex: number) => {
     setTabIndex(newIndex)
@@ -29,11 +26,11 @@ const MaketsPage = () => {
       </Box>
 
       <TabPanel value={tabIndex} index={0}>
-        <MarketTable markets={markets?.IRTMarkets || []} tabIndex={0} />
+        <MarketTable markets={markets?.IRTMarkets || []} />
       </TabPanel>
 
       <TabPanel value={tabIndex} index={1}>
-        <MarketTable markets={markets?.USDTMarkets || []} tabIndex={1} />
+        <MarketTable markets={markets?.USDTMarkets || []} />
       </TabPanel>
     </Container>
   )

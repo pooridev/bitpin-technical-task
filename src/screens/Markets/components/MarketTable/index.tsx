@@ -1,17 +1,18 @@
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Box, Pagination } from '@mui/material'
 
-import usePagination from '../../hooks/usePagination'
 import { NormalizedMarket } from '@screens/Markets/api/types'
 
 interface Props {
   markets: NormalizedMarket[]
+  paginationProps: {
+    currentPage: number
+    goToPage: (pageNumber: number) => void
+    totalPages: number
+  }
 }
 
-const MarketTable = ({ markets }: Props) => {
-  const { currentPage, totalPages, paginatedItems, goToPage } = usePagination({
-    items: markets,
-    itemsPerPage: 10,
-  })
+const MarketTable = ({ markets, paginationProps }: Props) => {
+  const { currentPage, totalPages, goToPage } = paginationProps
 
   return (
     <>
@@ -19,15 +20,13 @@ const MarketTable = ({ markets }: Props) => {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>Market Name</TableCell>
-              <TableCell>Base Currency</TableCell>
-              <TableCell>Quote Currency</TableCell>
+              <TableCell>نام رمز‌ارز</TableCell>
+              <TableCell>قیمت</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {paginatedItems.map(market => (
+            {markets.map(market => (
               <TableRow key={market.id}>
-                <TableCell>{market.title}</TableCell>
                 <TableCell>{market.titleFa}</TableCell>
                 <TableCell>{market.price}</TableCell>
               </TableRow>
@@ -37,7 +36,12 @@ const MarketTable = ({ markets }: Props) => {
       </TableContainer>
 
       <Box display='flex' justifyContent='center' mt={2}>
-        <Pagination count={totalPages} page={currentPage} onChange={(e, value) => goToPage(value)} color='primary' />
+        <Pagination
+          count={totalPages}
+          page={currentPage}
+          onChange={(_, pageNumber) => goToPage(pageNumber)}
+          color='primary'
+        />
       </Box>
     </>
   )

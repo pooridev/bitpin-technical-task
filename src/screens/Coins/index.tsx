@@ -1,9 +1,11 @@
+import { SyntheticEvent, useState } from 'react'
+
 import Box from '@mui/material/Box'
 import Container from '@mui/material/Container'
 import Tabs from '@mui/material/Tabs'
 import Tab from '@mui/material/Tab'
+
 import TabPanel from './components/TabPanel'
-import { SyntheticEvent, useState } from 'react'
 import CoinsTable from './components/CoinsTable'
 import { useGetCoins } from './api/queries'
 import usePagination from './hooks/usePagination'

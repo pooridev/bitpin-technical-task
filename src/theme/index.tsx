@@ -1,6 +1,8 @@
 import { PropsWithChildren } from 'react'
 
-import { createTheme, ThemeProvider as MuiThemeProvider } from '@mui/material'
+import MuiThemeProvider from '@mui/material/styles/ThemeProvider'
+import createTheme from '@mui/material/styles/createTheme'
+
 import { CacheProvider } from '@emotion/react'
 import createCache from '@emotion/cache'
 import { prefixer } from 'stylis'

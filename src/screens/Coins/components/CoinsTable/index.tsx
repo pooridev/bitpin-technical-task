@@ -1,4 +1,12 @@
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Box, Pagination } from '@mui/material'
+import Table from '@mui/material/Table'
+import TableBody from '@mui/material/TableBody'
+import TableCell from '@mui/material/TableCell'
+import TableContainer from '@mui/material/TableContainer'
+import TableRow from '@mui/material/TableRow'
+import Paper from '@mui/material/Paper'
+import Box from '@mui/material/Box'
+import TableHead from '@mui/material/TableHead'
+import Pagination from '@mui/material/Pagination'
 
 import { NormalizedCoin } from '@screens/Coins/api/types'
 import { Link } from 'react-router-dom'

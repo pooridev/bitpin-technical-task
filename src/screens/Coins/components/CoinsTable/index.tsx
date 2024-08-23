@@ -32,7 +32,7 @@ const CoinsTable = ({ coins, paginationProps }: Props) => {
                 <TableCell>{coin.titleFa}</TableCell>
                 <TableCell>{coin.price}</TableCell>
                 <TableCell>
-                  <Link to={`/markets/${coin.id}`}>جزئیات</Link>
+                  <Link to={`/coin/${coin.id}`}>جزئیات</Link>
                 </TableCell>
               </TableRow>
             ))}

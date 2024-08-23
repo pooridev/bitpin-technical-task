@@ -1,18 +1,18 @@
 import { useQuery } from '@tanstack/react-query'
 import { groupByBaseCurrency } from './DTOs'
-import { getMarkets } from './requests'
+import { getCoinList } from './requests'
 
-export const useGetMarkets = () => {
-  const { data: markets, isLoading: isLoadingMarkets } = useQuery({
+export const useGetCoins = () => {
+  const { data: coins, isLoading: isLoadingCoins } = useQuery({
     queryKey: ['markets'],
-    queryFn: getMarkets,
+    queryFn: getCoinList,
     // TODO remove this when development finished
     staleTime: 60 * 1000 * 10,
     select: groupByBaseCurrency,
   })
 
   return {
-    markets,
-    isLoadingMarkets,
+    coins,
+    isLoadingCoins,
   }
 }

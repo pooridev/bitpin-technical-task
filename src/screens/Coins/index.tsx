@@ -4,23 +4,23 @@ import Tabs from '@mui/material/Tabs'
 import Tab from '@mui/material/Tab'
 import TabPanel from './components/TabPanel'
 import { SyntheticEvent, useState } from 'react'
-import MarketTable from './components/MarketTable'
-import { useGetMarkets } from './api/queries'
+import CoinsTable from './components/CoinsTable'
+import { useGetCoins } from './api/queries'
 import usePagination from './hooks/usePagination'
 
-const MaketsPage = () => {
+const CoinsPage = () => {
   const [tabIndex, setTabIndex] = useState(0)
 
-  const { markets } = useGetMarkets()
+  const { coins } = useGetCoins()
 
-  const { paginatedItems: IRTMarkets, ...IRTMarkertsPagination } = usePagination({
+  const { paginatedItems: IRTCoins, ...IRTCoinsPagination } = usePagination({
     itemsPerPage: 10,
-    items: markets?.IRTMarkets || [],
+    items: coins?.IRTCoins || [],
   })
 
-  const { paginatedItems: USDTMarkets, ...USDTMaketsPagination } = usePagination({
+  const { paginatedItems: USDTCoins, ...USDTCoinsPagination } = usePagination({
     itemsPerPage: 10,
-    items: markets?.USDTMarkets || [],
+    items: coins?.USDTCoins || [],
   })
 
   const handleTabChange = (_: SyntheticEvent, newIndex: number) => {
@@ -37,14 +37,14 @@ const MaketsPage = () => {
       </Box>
 
       <TabPanel value={tabIndex} index={0}>
-        <MarketTable markets={IRTMarkets} paginationProps={IRTMarkertsPagination} />
+        <CoinsTable coins={IRTCoins} paginationProps={IRTCoinsPagination} />
       </TabPanel>
 
       <TabPanel value={tabIndex} index={1}>
-        <MarketTable markets={USDTMarkets} paginationProps={USDTMaketsPagination} />
+        <CoinsTable coins={USDTCoins} paginationProps={USDTCoinsPagination} />
       </TabPanel>
     </Container>
   )
 }
 
-export default MaketsPage
+export default CoinsPage

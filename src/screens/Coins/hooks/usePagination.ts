@@ -1,5 +1,4 @@
-// src/hooks/usePagination.ts
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 
 interface PaginationProps<T> {
   items: T[]
@@ -13,6 +12,7 @@ interface PaginationResult<T> {
   goToPage: (page: number) => void
 }
 
+// Not the most efficent solution.
 const deepClone = <T extends object>(object: T) => JSON.parse(JSON.stringify(object)) as T
 
 function usePagination<T>({ items, itemsPerPage }: PaginationProps<T>): PaginationResult<T> {
@@ -20,7 +20,10 @@ function usePagination<T>({ items, itemsPerPage }: PaginationProps<T>): Paginati
 
   const totalPages = Math.ceil(items.length / itemsPerPage)
 
-  const paginatedItems = deepClone(items).slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
+  const paginatedItems = useMemo(
+    () => deepClone(items).slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage),
+    [items, itemsPerPage, currentPage]
+  )
 
   const goToPage = (page: number) => {
     setCurrentPage(page)

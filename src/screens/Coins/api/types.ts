@@ -64,7 +64,7 @@ interface PriceInfo {
   amount: string | null
 }
 
-interface Market {
+interface Coin {
   id: number
   currency1: Currency
   currency2: Currency
@@ -96,14 +96,14 @@ interface Market {
   price_increment: string | null
 }
 
-export interface GetMarketsResponse {
+export interface GetCoinListResponse {
   count: number
   next: number
   previous: number
-  results: Array<Market>
+  results: Array<Coin>
 }
 
-export interface NormalizedMarket {
+export interface NormalizedCoin {
   id: number
   price: number
   title: string
@@ -111,7 +111,7 @@ export interface NormalizedMarket {
   image: string
 }
 
-export interface NormalizedMarketsResponse {
-  USDTMarkets: Array<NormalizedMarket>
-  IRTMarkets: Array<NormalizedMarket>
+export interface NormalizeCoinListResponse {
+  USDTCoins: Array<NormalizedCoin>
+  IRTCoins: Array<NormalizedCoin>
 }

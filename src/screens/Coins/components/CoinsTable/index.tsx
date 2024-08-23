@@ -1,9 +1,10 @@
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Box, Pagination } from '@mui/material'
 
-import { NormalizedMarket } from '@screens/Markets/api/types'
+import { NormalizedCoin } from '@screens/Coins/api/types'
+import { Link } from 'react-router-dom'
 
 interface Props {
-  markets: NormalizedMarket[]
+  coins: NormalizedCoin[]
   paginationProps: {
     currentPage: number
     goToPage: (pageNumber: number) => void
@@ -11,7 +12,7 @@ interface Props {
   }
 }
 
-const MarketTable = ({ markets, paginationProps }: Props) => {
+const CoinsTable = ({ coins, paginationProps }: Props) => {
   const { currentPage, totalPages, goToPage } = paginationProps
 
   return (
@@ -22,13 +23,17 @@ const MarketTable = ({ markets, paginationProps }: Props) => {
             <TableRow>
               <TableCell>نام رمز‌ارز</TableCell>
               <TableCell>قیمت</TableCell>
+              <TableCell></TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {markets.map(market => (
-              <TableRow key={market.id}>
-                <TableCell>{market.titleFa}</TableCell>
-                <TableCell>{market.price}</TableCell>
+            {coins.map(coin => (
+              <TableRow key={coin.id}>
+                <TableCell>{coin.titleFa}</TableCell>
+                <TableCell>{coin.price}</TableCell>
+                <TableCell>
+                  <Link to={`/markets/${coin.id}`}>جزئیات</Link>
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
@@ -47,4 +52,4 @@ const MarketTable = ({ markets, paginationProps }: Props) => {
   )
 }
 
-export default MarketTable
+export default CoinsTable

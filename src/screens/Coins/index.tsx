@@ -13,7 +13,7 @@ import usePagination from './hooks/usePagination'
 const CoinsPage = () => {
   const [tabIndex, setTabIndex] = useState(0)
 
-  const { coins } = useGetCoins()
+  const { coins, fetchingStatus } = useGetCoins()
 
   const { paginatedItems: IRTCoins, ...IRTCoinsPagination } = usePagination({
     itemsPerPage: 10,
@@ -39,11 +39,11 @@ const CoinsPage = () => {
       </Box>
 
       <TabPanel value={tabIndex} index={0}>
-        <CoinsTable coins={IRTCoins} paginationProps={IRTCoinsPagination} />
+        <CoinsTable fetchingStatus={fetchingStatus} coins={IRTCoins} paginationProps={IRTCoinsPagination} />
       </TabPanel>
 
       <TabPanel value={tabIndex} index={1}>
-        <CoinsTable coins={USDTCoins} paginationProps={USDTCoinsPagination} />
+        <CoinsTable fetchingStatus={fetchingStatus} coins={USDTCoins} paginationProps={USDTCoinsPagination} />
       </TabPanel>
     </Container>
   )

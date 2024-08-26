@@ -1,9 +1,15 @@
 import { useQuery } from '@tanstack/react-query'
 import { groupByBaseCurrency } from './DTOs'
 import { getCoinList } from './requests'
+import { getFetchingStatus } from '@api'
 
 export const useGetCoins = () => {
-  const { data: coins, isLoading: isLoadingCoins } = useQuery({
+  const {
+    data: coins,
+    isLoading,
+    isError,
+    isRefetching,
+  } = useQuery({
     queryKey: ['markets'],
     queryFn: getCoinList,
     // TODO remove this when development finished
@@ -13,6 +19,6 @@ export const useGetCoins = () => {
 
   return {
     coins,
-    isLoadingCoins,
+    fetchingStatus: getFetchingStatus({ isError, isLoading, isRefetching }),
   }
 }

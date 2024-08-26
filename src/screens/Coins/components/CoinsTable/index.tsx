@@ -8,13 +8,18 @@ import Box from '@mui/material/Box'
 import TableHead from '@mui/material/TableHead'
 import Pagination from '@mui/material/Pagination'
 import MuiLink from '@mui/material/Link'
+import Alert from '@mui/material/Alert'
+
+import { Link } from 'react-router-dom'
 
 import { NormalizedCoin } from '@screens/Coins/api/types'
-import { Link } from 'react-router-dom'
 import { getCoinDetailsState } from '@screens/Coins/utils'
+import { FetchingStatus } from '@api'
+import TableSkeloten from '../TableSkeloten'
 
 interface Props {
   coins: NormalizedCoin[]
+  fetchingStatus: FetchingStatus
   paginationProps: {
     currentPage: number
     goToPage: (pageNumber: number) => void
@@ -22,8 +27,16 @@ interface Props {
   }
 }
 
-const CoinsTable = ({ coins, paginationProps }: Props) => {
+const CoinsTable = ({ coins, paginationProps, fetchingStatus }: Props) => {
   const { currentPage, totalPages, goToPage } = paginationProps
+
+  if (fetchingStatus == 'error') {
+    return (
+      <Alert sx={{ m: 2 }} severity='error'>
+        خطا در دریافت اطلاعات
+      </Alert>
+    )
+  }
 
   return (
     <>
@@ -37,17 +50,19 @@ const CoinsTable = ({ coins, paginationProps }: Props) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {coins.map(coin => (
-              <TableRow key={coin.id}>
-                <TableCell>{coin.titleFa}</TableCell>
-                <TableCell>{coin.price}</TableCell>
-                <TableCell>
-                  <MuiLink state={getCoinDetailsState(coin)} component={Link} to={`/coin/${coin.id}`}>
-                    جزئیات
-                  </MuiLink>
-                </TableCell>
-              </TableRow>
-            ))}
+            {fetchingStatus == 'loading' && <TableSkeloten />}
+            {fetchingStatus == 'success' &&
+              coins.map(coin => (
+                <TableRow key={coin.id}>
+                  <TableCell>{coin.titleFa}</TableCell>
+                  <TableCell>{coin.price}</TableCell>
+                  <TableCell>
+                    <MuiLink state={getCoinDetailsState(coin)} component={Link} to={`/coin/${coin.id}`}>
+                      جزئیات
+                    </MuiLink>
+                  </TableCell>
+                </TableRow>
+              ))}
           </TableBody>
         </Table>
       </TableContainer>

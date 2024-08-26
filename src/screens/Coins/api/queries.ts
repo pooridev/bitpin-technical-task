@@ -12,8 +12,6 @@ export const useGetCoins = () => {
   } = useQuery({
     queryKey: ['markets'],
     queryFn: getCoinList,
-    // TODO remove this when development finished
-    staleTime: 60 * 1000 * 10,
     select: groupByBaseCurrency,
   })
 

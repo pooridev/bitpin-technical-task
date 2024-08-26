@@ -1,9 +1,9 @@
-import { lazy } from 'react'
 import { Route, Routes } from 'react-router-dom'
+import { loadable } from '@utils'
 
-const CoinsPage = lazy(() => import('@screens/Coins'))
-const CoinPage = lazy(() => import('@screens/Coin'))
-const NotFoundPage = lazy(() => import('@screens/NotFound'))
+const CoinsPage = loadable(() => import('@screens/Coins'))
+const CoinPage = loadable(() => import('@screens/Coin'))
+const NotFoundPage = loadable(() => import('@screens/NotFound'))
 
 const AppRouter = () => {
   return (

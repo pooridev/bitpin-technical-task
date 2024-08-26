@@ -21,7 +21,9 @@
     "noFallthroughCasesInSwitch": true,
     "paths": {
       "@screens/*": ["./src/screens/*"],
-      "@api": ["./src/api/index.ts"]
+      "@api": ["./src/api/index.ts"],
+      "@components/*": ["./src/components/*"],
+      "@utils": ["./src/utils/index.ts"]
     }
   },
 

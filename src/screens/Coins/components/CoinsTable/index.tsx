@@ -7,9 +7,11 @@ import Paper from '@mui/material/Paper'
 import Box from '@mui/material/Box'
 import TableHead from '@mui/material/TableHead'
 import Pagination from '@mui/material/Pagination'
+import MuiLink from '@mui/material/Link'
 
 import { NormalizedCoin } from '@screens/Coins/api/types'
 import { Link } from 'react-router-dom'
+import { getCoinDetailsState } from '@screens/Coins/utils'
 
 interface Props {
   coins: NormalizedCoin[]
@@ -40,7 +42,9 @@ const CoinsTable = ({ coins, paginationProps }: Props) => {
                 <TableCell>{coin.titleFa}</TableCell>
                 <TableCell>{coin.price}</TableCell>
                 <TableCell>
-                  <Link to={`/coin/${coin.id}`}>جزئیات</Link>
+                  <MuiLink state={getCoinDetailsState(coin)} component={Link} to={`/coin/${coin.id}`}>
+                    جزئیات
+                  </MuiLink>
                 </TableCell>
               </TableRow>
             ))}

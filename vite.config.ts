@@ -8,6 +8,8 @@ export default defineConfig({
     alias: {
       '@screens': path.resolve(__dirname, './src/screens'),
       '@api': path.resolve(__dirname, './src/api'),
+      '@utils': path.resolve(__dirname, './src/utils'),
+      '@components': path.resolve(__dirname, './src/components'),
     },
   },
   server: {

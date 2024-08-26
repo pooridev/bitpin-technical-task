@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react'
+import { deepClone } from '@utils'
 
 interface PaginationProps<T> {
   items: T[]
@@ -11,9 +12,6 @@ interface PaginationResult<T> {
   paginatedItems: T[]
   goToPage: (page: number) => void
 }
-
-// Not the most efficent solution.
-const deepClone = <T extends object>(object: T) => JSON.parse(JSON.stringify(object)) as T
 
 function usePagination<T>({ items, itemsPerPage }: PaginationProps<T>): PaginationResult<T> {
   const [currentPage, setCurrentPage] = useState(1)

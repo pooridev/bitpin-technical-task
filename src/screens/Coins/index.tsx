@@ -5,7 +5,7 @@ import Container from '@mui/material/Container'
 import Tabs from '@mui/material/Tabs'
 import Tab from '@mui/material/Tab'
 
-import TabPanel from './components/TabPanel'
+import TabPanel from '@components/TabPanel'
 import CoinsTable from './components/CoinsTable'
 import { useGetCoins } from './api/queries'
 import usePagination from './hooks/usePagination'

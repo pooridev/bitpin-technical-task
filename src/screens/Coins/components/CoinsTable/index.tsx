@@ -16,6 +16,7 @@ import { NormalizedCoin } from '@screens/Coins/api/types'
 import { getCoinDetailsState } from '@screens/Coins/utils'
 import { FetchingStatus } from '@api'
 import TableSkeloten from '../TableSkeloten'
+import { formatPrice } from '@utils'
 
 interface Props {
   coins: NormalizedCoin[]
@@ -55,7 +56,7 @@ const CoinsTable = ({ coins, paginationProps, fetchingStatus }: Props) => {
               coins.map(coin => (
                 <TableRow key={coin.id}>
                   <TableCell>{coin.titleFa}</TableCell>
-                  <TableCell>{coin.price}</TableCell>
+                  <TableCell>{formatPrice(String(coin.price))}</TableCell>
                   <TableCell>
                     <MuiLink state={getCoinDetailsState(coin)} component={Link} to={`/coin/${coin.id}`}>
                       جزئیات

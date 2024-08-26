@@ -15,6 +15,7 @@ import { FetchingStatus } from '@api'
 import { ORDERS_TABLE_HEAD } from '@screens/Coin/constants'
 import { Skeleton } from '@mui/material'
 import { memo } from 'react'
+import { formatPrice, toPersian } from '@utils'
 
 interface OrdersTableProps {
   orders: Array<NormalizedOrder>
@@ -86,9 +87,9 @@ const Table = memo(({ fetchingStatus, orders }: TableProps) => (
             ))
           : orders?.map((order, index) => (
               <TableRow key={index}>
-                <TableCell key={index}>{order.price}</TableCell>
-                <TableCell key={index}>{order.value}</TableCell>
-                <TableCell key={index}>{order.remain}</TableCell>
+                <TableCell key={index}>{formatPrice(String(order.price))}</TableCell>
+                <TableCell key={index}>{toPersian(order.value)}</TableCell>
+                <TableCell key={index}>{toPersian(order.remain)}</TableCell>
               </TableRow>
             ))}
       </TableBody>

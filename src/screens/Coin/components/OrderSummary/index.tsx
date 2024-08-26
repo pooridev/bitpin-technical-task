@@ -3,6 +3,7 @@ import Typography from '@mui/material/Typography'
 
 import { NormalizedOrder } from '@screens/Coin/api/types'
 import { calculatOrderSummary } from '@screens/Coin/utils'
+import { formatPrice, toPersian } from '@utils'
 
 interface Props {
   orders: Array<NormalizedOrder>
@@ -15,9 +16,9 @@ const OrderSummary = ({ orders, percentage }: Props) => {
   return (
     <Box mt={2}>
       <Typography variant='h6'>خلاصه سفارشات</Typography>
-      <Typography>حجم کل: {totalVolume.toFixed(2)}</Typography>
-      <Typography>قیمت میانگین: {averagePrice.toFixed(2)}</Typography>
-      <Typography>مبلغ کل: {totalAmount.toFixed(2)}</Typography>
+      <Typography>حجم کل: {toPersian(totalVolume.toFixed(2))}</Typography>
+      <Typography>قیمت میانگین: {formatPrice(averagePrice.toFixed(2))}</Typography>
+      <Typography>مبلغ کل: {formatPrice(totalAmount.toFixed(2))}</Typography>
     </Box>
   )
 }

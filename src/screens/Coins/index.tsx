@@ -39,11 +39,11 @@ const CoinsPage = () => {
       </Box>
 
       <TabPanel value={tabIndex} index={0}>
-        <CoinsTable fetchingStatus={fetchingStatus} coins={IRTCoins} paginationProps={IRTCoinsPagination} />
+        <CoinsTable key={tabIndex} fetchingStatus={fetchingStatus} coins={IRTCoins} paginationProps={IRTCoinsPagination} />
       </TabPanel>
 
       <TabPanel value={tabIndex} index={1}>
-        <CoinsTable fetchingStatus={fetchingStatus} coins={USDTCoins} paginationProps={USDTCoinsPagination} />
+        <CoinsTable key={tabIndex} fetchingStatus={fetchingStatus} coins={USDTCoins} paginationProps={USDTCoinsPagination} />
       </TabPanel>
     </Container>
   )

@@ -1,4 +1,4 @@
-import { formatPrice, addCommas, toPersian } from './numbers' // Update the path as per your project structure
+import { formatPrice, addCommas, toPersian } from './numbers'
 
 describe('formatPrice', () => {
   it('should format a number with commas and convert to Persian', () => {

@@ -27,6 +27,6 @@ export const normalizeMatches = (response: GetMatchesResponse): NormalizedGetMat
       matchAmount: Number(match.match_amount),
       type: match.type,
       time: Number(match.time),
-      matchId: Number(match.match_id),
+      matchId: match.match_id,
     }))
 }

@@ -15,8 +15,9 @@ import { Link } from 'react-router-dom'
 import { NormalizedCoin } from '@screens/Coins/api/types'
 import { getCoinDetailsState } from '@screens/Coins/utils'
 import { FetchingStatus } from '@api'
-import TableSkeloten from '../TableSkeloten'
 import { formatPrice } from '@utils'
+import TableSkeloten from '@components/TableSkeloten'
+import { COINS_TABLE_HEAD } from '@screens/Coins/constants'
 
 interface Props {
   coins: NormalizedCoin[]
@@ -45,14 +46,15 @@ const CoinsTable = ({ coins, paginationProps, fetchingStatus }: Props) => {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>نام رمز‌ارز</TableCell>
-              <TableCell>قیمت</TableCell>
-              <TableCell></TableCell>
+              {COINS_TABLE_HEAD.map(col => (
+                <TableCell key={col.id}>{col.label}</TableCell>
+              ))}
             </TableRow>
           </TableHead>
           <TableBody>
-            {fetchingStatus == 'loading' && <TableSkeloten />}
-            {fetchingStatus == 'success' &&
+            {fetchingStatus == 'loading' ? (
+              <TableSkeloten rowCount={coins.length} columnCount={COINS_TABLE_HEAD.length} />
+            ) : (
               coins.map(coin => (
                 <TableRow key={coin.id}>
                   <TableCell>{coin.titleFa}</TableCell>
@@ -63,7 +65,8 @@ const CoinsTable = ({ coins, paginationProps, fetchingStatus }: Props) => {
                     </MuiLink>
                   </TableCell>
                 </TableRow>
-              ))}
+              ))
+            )}
           </TableBody>
         </Table>
       </TableContainer>

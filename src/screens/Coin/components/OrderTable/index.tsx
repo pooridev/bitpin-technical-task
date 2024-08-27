@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import MuiTable from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
 import TableCell from '@mui/material/TableCell'
@@ -13,9 +14,8 @@ import { NormalizedOrder } from '@screens/Coin/api/types'
 import OrderSummary from '../OrderSummary'
 import { FetchingStatus } from '@api'
 import { ORDERS_TABLE_HEAD } from '@screens/Coin/constants'
-import { Skeleton } from '@mui/material'
-import { memo } from 'react'
 import { formatPrice, toPersian } from '@utils'
+import TableSkeloten from '@components/TableSkeloten'
 
 interface OrdersTableProps {
   orders: Array<NormalizedOrder>
@@ -26,21 +26,13 @@ interface OrdersTableProps {
 
 const OrdersTable = ({ orders, fetchingStatus, percentage, onPercentageChange }: OrdersTableProps) => {
   if (fetchingStatus == 'error') {
-    return (
-      <Alert sx={{ m: 2 }} severity='error'>
-        خطا در دریافت اطلاعات
-      </Alert>
-    )
+    return <Alert severity='error'>خطا در دریافت اطلاعات</Alert>
   }
 
   const isEmpty = orders.length == 0
 
   if (fetchingStatus != 'loading' && isEmpty) {
-    return (
-      <Alert sx={{ m: 2 }} severity='info'>
-        سفارشی تاکنون ثبت نشده است
-      </Alert>
-    )
+    return <Alert severity='info'>سفارشی تاکنون ثبت نشده است</Alert>
   }
 
   return (
@@ -75,23 +67,17 @@ const Table = memo(({ fetchingStatus, orders }: TableProps) => (
         </TableRow>
       </TableHead>
       <TableBody>
-        {fetchingStatus == 'loading'
-          ? Array.from(new Array(10)).map((_, idx) => (
-              <TableRow key={idx}>
-                {ORDERS_TABLE_HEAD.map((_, i) => (
-                  <TableCell key={i}>
-                    <Skeleton variant='text' />
-                  </TableCell>
-                ))}
-              </TableRow>
-            ))
-          : orders?.map((order, index) => (
-              <TableRow key={index}>
-                <TableCell key={index}>{formatPrice(String(order.price))}</TableCell>
-                <TableCell key={index}>{toPersian(order.value)}</TableCell>
-                <TableCell key={index}>{toPersian(order.remain)}</TableCell>
-              </TableRow>
-            ))}
+        {fetchingStatus == 'loading' ? (
+          <TableSkeloten rowCount={10} columnCount={3} />
+        ) : (
+          orders?.map(order => (
+            <TableRow key={order.value}>
+              <TableCell>{formatPrice(String(order.price))}</TableCell>
+              <TableCell>{toPersian(order.value)}</TableCell>
+              <TableCell>{toPersian(order.remain)}</TableCell>
+            </TableRow>
+          ))
+        )}
       </TableBody>
     </MuiTable>
   </TableContainer>

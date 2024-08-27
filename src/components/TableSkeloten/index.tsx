@@ -2,12 +2,17 @@ import TableRow from '@mui/material/TableRow'
 import TableCell from '@mui/material/TableCell'
 import Skeleton from '@mui/material/Skeleton'
 
-const TableSkeloten = () => {
-  return Array(10)
+interface Props {
+  rowCount: number
+  columnCount: number
+}
+
+const TableSkeloten = ({ rowCount, columnCount }: Props) => {
+  return Array(rowCount)
     .fill(null)
     .map((_, index) => (
       <TableRow key={index}>
-        {Array(3)
+        {Array(columnCount)
           .fill(null)
           .map((_, i) => (
             <TableCell key={i}>

@@ -37,7 +37,7 @@ interface Match {
   value: StringifiedNumber
   match_amount: StringifiedNumber
   type: OrderType
-  match_id: StringifiedNumber
+  match_id: string
 }
 
 export type GetMatchesResponse = Array<Match>
@@ -48,7 +48,7 @@ export type NormalizedMatch = {
   value: number
   matchAmount: number
   type: OrderType
-  matchId: number
+  matchId: string
 }
 
 export type NormalizedGetMatchesResponse = Array<NormalizedMatch>

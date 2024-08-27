@@ -1,24 +1,23 @@
 import { useState } from 'react'
-import { useLocation, useNavigate, useParams } from 'react-router-dom'
+import { useLocation, useParams } from 'react-router-dom'
 
 import Box from '@mui/material/Box'
 import Container from '@mui/material/Container'
 import Tabs from '@mui/material/Tabs'
 import Tab from '@mui/material/Tab'
 import Typography from '@mui/material/Typography'
-import IconButton from '@mui/material/IconButton'
+
 import Avatar from '@mui/material/Avatar'
-import ChevronLeft from '@mui/icons-material/ChevronLeft'
 
 import { ORDERS_TAB, OrdersTab, useOrdersTab } from './hooks/useOrdersTab'
 import OrdersTable from './components/OrderTable'
 import { useGetMatches, useGetOrders } from './api/queries'
 import MatchesTable from './components/MatchesTable'
 import TabPanel from '@components/TabPanel'
+import SwitchTheme from '@components/SwitchTheme'
 
 const CoinsPage = () => {
   const [percentage, setPercentage] = useState(0)
-  const navigate = useNavigate()
 
   const { handleChangeOrdersTab, activeOrdersTab } = useOrdersTab()
 
@@ -49,10 +48,6 @@ const CoinsPage = () => {
     }
   }
 
-  const handleGoBack = () => {
-    navigate(-1)
-  }
-
   return (
     <Container maxWidth='md'>
       <Box display='flex' justifyContent='space-between' alignItems='center' sx={{ padding: 2 }}>
@@ -61,9 +56,7 @@ const CoinsPage = () => {
           <Avatar alt={coinTitle} src={coinImage} />
         </Box>
 
-        <IconButton onClick={handleGoBack}>
-          <ChevronLeft />
-        </IconButton>
+        <SwitchTheme />
       </Box>
 
       <Box sx={{ borderBottom: 1, borderColor: 'divider', marginTop: 2 }}>

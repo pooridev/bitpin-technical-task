@@ -9,6 +9,7 @@ import TabPanel from '@components/TabPanel'
 import CoinsTable from './components/CoinsTable'
 import { useGetCoins } from './api/queries'
 import usePagination from './hooks/usePagination'
+import SwitchTheme from '@components/SwitchTheme'
 
 const CoinsPage = () => {
   const [tabIndex, setTabIndex] = useState(0)
@@ -31,19 +32,39 @@ const CoinsPage = () => {
 
   return (
     <Container maxWidth='md'>
-      <Box sx={{ borderBottom: 1, borderColor: 'divider', marginBottom: 2 }}>
+      <Box
+        sx={{
+          borderBottom: 1,
+          borderColor: 'divider',
+          marginBottom: 2,
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+        }}
+      >
         <Tabs value={tabIndex} onChange={handleTabChange} aria-label='market tabs'>
           <Tab label='پایه تومان' />
           <Tab label='پایه تتر' />
         </Tabs>
+        <SwitchTheme />
       </Box>
 
       <TabPanel value={tabIndex} index={0}>
-        <CoinsTable key={tabIndex} fetchingStatus={fetchingStatus} coins={IRTCoins} paginationProps={IRTCoinsPagination} />
+        <CoinsTable
+          key={tabIndex}
+          fetchingStatus={fetchingStatus}
+          coins={IRTCoins}
+          paginationProps={IRTCoinsPagination}
+        />
       </TabPanel>
 
       <TabPanel value={tabIndex} index={1}>
-        <CoinsTable key={tabIndex} fetchingStatus={fetchingStatus} coins={USDTCoins} paginationProps={USDTCoinsPagination} />
+        <CoinsTable
+          key={tabIndex}
+          fetchingStatus={fetchingStatus}
+          coins={USDTCoins}
+          paginationProps={USDTCoinsPagination}
+        />
       </TabPanel>
     </Container>
   )

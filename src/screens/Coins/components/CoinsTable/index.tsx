@@ -53,7 +53,7 @@ const CoinsTable = ({ coins, paginationProps, fetchingStatus }: Props) => {
           </TableHead>
           <TableBody>
             {fetchingStatus == 'loading' ? (
-              <TableSkeloten rowCount={coins.length} columnCount={COINS_TABLE_HEAD.length} />
+              <TableSkeloten rowCount={10} columnCount={COINS_TABLE_HEAD.length} />
             ) : (
               coins.map(coin => (
                 <TableRow key={coin.id}>

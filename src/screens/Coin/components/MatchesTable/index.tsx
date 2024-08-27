@@ -11,6 +11,7 @@ import { FetchingStatus } from '@api'
 import { NormalizedMatch } from '@screens/Coin/api/types'
 import { MATCHES_TABLE_HEAD } from '@screens/Coin/constants'
 import TableSkeloten from '@components/TableSkeloten'
+import { formatPrice, toPersian } from '@utils'
 
 interface Props {
   matches: Array<NormalizedMatch>
@@ -44,9 +45,9 @@ const MatchesTable = ({ matches, fetchingStatus }: Props) => {
           ) : (
             matches?.map(match => (
               <TableRow key={match.matchId}>
-                <TableCell>{match.price}</TableCell>
-                <TableCell>{match.time}</TableCell>
-                <TableCell>{match.matchAmount}</TableCell>
+                <TableCell>{formatPrice(String(match.price))}</TableCell>
+                <TableCell>{toPersian(match.time)}</TableCell>
+                <TableCell>{toPersian(match.matchAmount)}</TableCell>
               </TableRow>
             ))
           )}

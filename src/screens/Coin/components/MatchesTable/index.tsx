@@ -41,7 +41,7 @@ const MatchesTable = ({ matches, fetchingStatus }: Props) => {
         </TableHead>
         <TableBody>
           {fetchingStatus == 'loading' ? (
-            <TableSkeloten rowCount={10} columnCount={3} />
+            <TableSkeloten rowCount={10} columnCount={MATCHES_TABLE_HEAD.length} />
           ) : (
             matches?.map(match => (
               <TableRow key={match.matchId}>

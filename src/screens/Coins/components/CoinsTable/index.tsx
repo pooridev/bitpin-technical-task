@@ -33,11 +33,7 @@ const CoinsTable = ({ coins, paginationProps, fetchingStatus }: Props) => {
   const { currentPage, totalPages, goToPage } = paginationProps
 
   if (fetchingStatus == 'error') {
-    return (
-      <Alert sx={{ m: 2 }} severity='error'>
-        خطا در دریافت اطلاعات
-      </Alert>
-    )
+    return <Alert severity='error'>خطا در دریافت اطلاعات</Alert>
   }
 
   return (

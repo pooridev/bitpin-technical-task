@@ -74,7 +74,7 @@ const Table = memo(({ fetchingStatus, orders }: TableProps) => (
       </TableHead>
       <TableBody>
         {fetchingStatus == 'loading' ? (
-          <TableSkeloten rowCount={10} columnCount={3} />
+          <TableSkeloten rowCount={10} columnCount={ORDERS_TABLE_HEAD.length} />
         ) : (
           orders?.map(order => (
             <TableRow key={order.value}>

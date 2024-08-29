@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { useLocation, useParams } from 'react-router-dom'
 
 import Box from '@mui/material/Box'
@@ -17,8 +16,6 @@ import TabPanel from '@components/TabPanel'
 import SwitchTheme from '@components/SwitchTheme'
 
 const CoinsPage = () => {
-  const [percentage, setPercentage] = useState(0)
-
   const { handleChangeOrdersTab, activeOrdersTab } = useOrdersTab()
 
   const { marketId } = useParams<{ marketId: string }>()
@@ -42,12 +39,6 @@ const CoinsPage = () => {
     enabled: activeOrdersTab == ORDERS_TAB.RECENT,
   })
 
-  const handlePercentageChange = (percentage: number) => {
-    if (percentage >= 0 && percentage <= 100) {
-      setPercentage(percentage)
-    }
-  }
-
   return (
     <Container maxWidth='md'>
       <Box display='flex' justifyContent='space-between' alignItems='center' sx={{ padding: 2 }}>
@@ -67,21 +58,11 @@ const CoinsPage = () => {
         </Tabs>
       </Box>
       <TabPanel value={activeOrdersTab} index={ORDERS_TAB.BUY}>
-        <OrdersTable
-          orders={buyOrders || []}
-          fetchingStatus={buyOrdersFetchingStatus}
-          percentage={percentage}
-          onPercentageChange={handlePercentageChange}
-        />
+        <OrdersTable orders={buyOrders || []} fetchingStatus={buyOrdersFetchingStatus} />
       </TabPanel>
 
       <TabPanel value={activeOrdersTab} index={ORDERS_TAB.SELL}>
-        <OrdersTable
-          orders={sellOrders || []}
-          fetchingStatus={sellOrdersFetchingStatu}
-          percentage={percentage}
-          onPercentageChange={handlePercentageChange}
-        />
+        <OrdersTable orders={sellOrders || []} fetchingStatus={sellOrdersFetchingStatu} />
       </TabPanel>
 
       <TabPanel value={activeOrdersTab} index={ORDERS_TAB.RECENT}>

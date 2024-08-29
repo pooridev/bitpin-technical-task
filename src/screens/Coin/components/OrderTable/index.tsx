@@ -1,4 +1,4 @@
-import { memo } from 'react'
+import { memo, useState } from 'react'
 import MuiTable from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
 import TableCell from '@mui/material/TableCell'
@@ -20,11 +20,11 @@ import TableSkeloten from '@components/TableSkeloten'
 interface OrdersTableProps {
   orders: Array<NormalizedOrder>
   fetchingStatus: FetchingStatus
-  percentage: number
-  onPercentageChange: (percentage: number) => void
 }
 
-const OrdersTable = ({ orders, fetchingStatus, percentage, onPercentageChange }: OrdersTableProps) => {
+const OrdersTable = ({ orders, fetchingStatus }: OrdersTableProps) => {
+  const [percentage, setPercentage] = useState(0)
+
   if (fetchingStatus == 'error') {
     return <Alert severity='error'>خطا در دریافت اطلاعات</Alert>
   }
@@ -35,13 +35,19 @@ const OrdersTable = ({ orders, fetchingStatus, percentage, onPercentageChange }:
     return <Alert severity='info'>سفارشی تاکنون ثبت نشده است</Alert>
   }
 
+  const handlePercentageChange = (percentage: number) => {
+    if (percentage >= 0 && percentage <= 100) {
+      setPercentage(percentage)
+    }
+  }
+
   return (
     <Box>
       <TextField
         label='درصد دریافتی'
         type='number'
         value={percentage}
-        onChange={({ target }) => onPercentageChange(Number(target.value))}
+        onChange={({ target }) => handlePercentageChange(Number(target.value))}
         fullWidth
         margin='normal'
       />
